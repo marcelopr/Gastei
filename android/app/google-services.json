@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "931830242794",
+    "firebase_url": "https://walletapp-7858a.firebaseio.com",
+    "project_id": "walletapp-7858a",
+    "storage_bucket": "walletapp-7858a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931830242794:android:7c88a0c6b83aa260552693",
+        "android_client_info": {
+          "package_name": "com.example.carteira"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931830242794-mnbi546hapgk8tc5tnb8ua6pigbc711d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD82bBV8AexddFkhZO7btn2O3WNXJ1dTqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931830242794-mnbi546hapgk8tc5tnb8ua6pigbc711d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931830242794:android:c7721a34575b69a1",
+        "android_client_info": {
+          "package_name": "com.example.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931830242794-mnbi546hapgk8tc5tnb8ua6pigbc711d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD82bBV8AexddFkhZO7btn2O3WNXJ1dTqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931830242794-mnbi546hapgk8tc5tnb8ua6pigbc711d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

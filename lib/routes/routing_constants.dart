@@ -1,0 +1,12 @@
+const String HomeViewRoute = '/';
+const String SplashScreenRoute = 'splash-screen';
+const String LoginRoute = 'login';
+const String HomeRoute = 'login';
+const String RegistrationRoute = 'registration';
+const String WalletRoute = 'wallet';
+const String PostRoute = 'post';
+const String AccountRoute = 'account';
+const String MonthlyBalanceDetaisRoute = 'monthly-balance-details';
+const String MonthlyBalanceRoute = 'monthly-balance';
+const String RegistersRoute = 'registers';
+const String MainRoute = 'main';
