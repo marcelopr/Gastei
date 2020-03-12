@@ -99,7 +99,7 @@ class _RegistersScreenState extends State<RegistersScreen> {
       appBar: AppBar(
         title: Text(
           'Histórico',
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.subhead,
         ),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
@@ -107,7 +107,7 @@ class _RegistersScreenState extends State<RegistersScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search, color: Colors.black),
+            icon: Icon(Icons.search),
             onPressed: () async {
               var result = await showSearch(
                 context: context,
@@ -149,7 +149,8 @@ class _RegistersScreenState extends State<RegistersScreen> {
 
   Center _message() {
     return Center(
-      child: Text('Não existem registros.', style: kListMessageStyle),
+      child: Text('Não existem registros.',
+          style: Theme.of(context).textTheme.body1),
     );
   }
 }

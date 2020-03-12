@@ -3,6 +3,7 @@ import 'package:carteira/models/register.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/routes/routing_constants.dart';
 import 'package:carteira/services/firestore.dart';
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:carteira/utils/currency_formatter.dart';
 import 'package:carteira/utils/custom_icons.dart';
 import 'package:carteira/utils/date_formatter.dart';
@@ -39,10 +40,10 @@ class _RecentRegisterState extends State<RecentRegister> {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      color: kBlue,
+      color: Theme.of(context).colorScheme.primary,
       disabledColor: kBlue,
       shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(12.0),
+        borderRadius: new BorderRadius.circular(AppTheme.borderRadius),
       ),
       padding: EdgeInsets.all(12.0),
       onPressed: () {
@@ -62,7 +63,11 @@ class _RecentRegisterState extends State<RecentRegister> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Histórico', style: kMainHeaderTextStyle),
+              Text('Histórico',
+                  style: Theme.of(context).textTheme.body2.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      )),
               StreamBuilder(
                 stream: _register,
                 builder: (context, snapshot) {
@@ -70,7 +75,9 @@ class _RecentRegisterState extends State<RecentRegister> {
                     if (snapshot.data.documents.toList().isEmpty) {
                       return Text(
                         'Você ainda não possui registros adicionados',
-                        style: kLastRegisterInfoTextStyle,
+                        style: Theme.of(context).textTheme.subhead.copyWith(
+                              color: Colors.white,
+                            ),
                       );
                     } else {
                       Register register = Register()
@@ -83,9 +90,11 @@ class _RecentRegisterState extends State<RecentRegister> {
                         children: <Widget>[
                           Container(
                             decoration: BoxDecoration(
-                              color: kBlueLight,
+                              color:
+                                  Theme.of(context).colorScheme.primaryVariant,
                               borderRadius: BorderRadius.all(
-                                Radius.circular(18),
+                                Radius.circular(
+                                    AppTheme.categoryIconBorderRadius),
                               ),
                             ),
                             child: Padding(
@@ -104,7 +113,10 @@ class _RecentRegisterState extends State<RecentRegister> {
                           SizedBox(height: 16.0),
                           Text(
                             'Última movimentação foi registrada ${_registerDate(register.date)} com valor de R\$ ${_currencyFormatter.realSign(register.value)}.',
-                            style: kLastRegisterInfoTextStyle,
+                            style: Theme.of(context).textTheme.subhead.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 21.0,
+                                ),
                           ),
                         ],
                       );
@@ -112,7 +124,9 @@ class _RecentRegisterState extends State<RecentRegister> {
                   } else {
                     return Text(
                       'Você ainda não possui registros adicionados',
-                      style: kLastRegisterInfoTextStyle,
+                      style: Theme.of(context).textTheme.subhead.copyWith(
+                            color: Colors.white,
+                          ),
                     );
 
                     ///Evita o erro de layout por causa do snapshot inexistente

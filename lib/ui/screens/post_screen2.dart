@@ -168,7 +168,7 @@ class _PostScreen2State extends State<PostScreen2> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 2,
-        backgroundColor: kToastBackgroundColor,
+        backgroundColor: Colors.grey,
         textColor: Colors.white,
         fontSize: 14.0);
   }
@@ -176,30 +176,31 @@ class _PostScreen2State extends State<PostScreen2> {
   @override
   Widget build(BuildContext context) {
     print('POST BUILD');
+    ThemeData theme = Theme.of(context);
+
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
-            buildTopRow(context),
+            buildTopRow(context, theme),
             SizedBox(height: 20),
-            buildValueTextField(),
+            buildValueTextField(theme),
             SizedBox(height: 20),
-            Divider(color: Colors.black),
-            buildTitleRow(),
-            Divider(color: Colors.black),
-            buildTypeRow(),
-            buildCategoryRow(),
-            Divider(color: Colors.black),
-            buildDateRow(),
+            Divider(),
+            buildTitleRow(theme),
+            Divider(),
+            buildTypeRow(theme),
+            buildCategoryRow(theme),
+            Divider(),
+            buildDateRow(theme),
           ],
         ),
       ),
     );
   }
 
-  Row buildTopRow(BuildContext context) {
+  Row buildTopRow(BuildContext context, ThemeData theme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -207,7 +208,6 @@ class _PostScreen2State extends State<PostScreen2> {
           flex: 1,
           child: IconButton(
             icon: Icon(Icons.close),
-            color: Colors.black54,
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
@@ -219,7 +219,6 @@ class _PostScreen2State extends State<PostScreen2> {
           flex: 1,
           child: IconButton(
             icon: Icon(Icons.check),
-            color: Colors.black54,
             onPressed: () {
               _validateForm() ? _addRegister() : _toast('Dados inválidos');
             },
@@ -229,16 +228,16 @@ class _PostScreen2State extends State<PostScreen2> {
     );
   }
 
-  TextField buildValueTextField() {
+  TextField buildValueTextField(ThemeData theme) {
     return TextField(
       keyboardType: TextInputType.number,
       maxLines: 1,
       autofocus: false,
       textInputAction: TextInputAction.next,
       controller: _valueController,
-      style: TextStyle(
+      style: theme.textTheme.title.copyWith(
         fontSize: 50,
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.bold,
       ),
       textAlign: TextAlign.center,
       decoration: InputDecoration.collapsed(hintText: 'Valor'),
@@ -251,7 +250,7 @@ class _PostScreen2State extends State<PostScreen2> {
     );
   }
 
-  Widget buildTitleRow() {
+  Widget buildTitleRow(ThemeData theme) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
@@ -259,7 +258,11 @@ class _PostScreen2State extends State<PostScreen2> {
         children: <Widget>[
           Flexible(
             flex: 1,
-            child: Text('Título', style: kTextFieldLabel),
+            child: Text(
+              'Título',
+              style:
+                  theme.textTheme.body2.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
           Flexible(
             flex: 2,
@@ -280,55 +283,48 @@ class _PostScreen2State extends State<PostScreen2> {
     );
   }
 
-  Widget buildTypeRow() {
+  Widget buildTypeRow(ThemeData theme) {
     return FlatButton(
       onPressed: () {
-        _showBottomSheetList(1);
+        _showBottomSheetList(1, theme);
       },
       padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Flexible(
-            flex: 1,
-            child: Text(
-              'Tipo',
-              style: kTextFieldLabel,
-            ),
+          Text(
+            'Tipo',
+            style: theme.textTheme.body2.copyWith(fontWeight: FontWeight.bold),
           ),
           Text(
             _type,
-            style: kFormTextStyle,
+            style: theme.textTheme.body1,
           ),
         ],
       ),
     );
   }
 
-  Widget buildCategoryRow() {
+  Widget buildCategoryRow(ThemeData theme) {
     return !_categoryEnabled
         ? Container(width: 0.0, height: 0.0)
         : Column(
             children: <Widget>[
-              Divider(color: Colors.black),
+              Divider(),
               FlatButton(
                 onPressed: () {
-                  _showBottomSheetList(2);
+                  _showBottomSheetList(2, theme);
                 },
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: Text('Categoria', style: kTextFieldLabel),
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: Text(
-                        _category,
-                        style: kFormTextStyle,
-                      ),
+                    Text('Categoria',
+                        style: theme.textTheme.body2
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      _category,
+                      style: theme.textTheme.body1,
                     ),
                   ],
                 ),
@@ -337,7 +333,7 @@ class _PostScreen2State extends State<PostScreen2> {
           );
   }
 
-  Padding buildDateRow() {
+  Padding buildDateRow(ThemeData theme) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
@@ -346,13 +342,15 @@ class _PostScreen2State extends State<PostScreen2> {
         children: <Widget>[
           Flexible(
             flex: 1,
-            child: Text('Data', style: kTextFieldLabel),
+            child: Text('Data',
+                style: theme.textTheme.body2
+                    .copyWith(fontWeight: FontWeight.bold)),
           ),
           Flexible(
             flex: 2,
             child: DateTimeField(
               keyboardType: TextInputType.datetime,
-              style: kFormTextStyle,
+              style: theme.textTheme.body1,
               format: format,
               textInputAction: TextInputAction.done,
               resetIcon: Icon(Icons.close, size: 24),
@@ -369,7 +367,6 @@ class _PostScreen2State extends State<PostScreen2> {
               },
               onChanged: (dateTime) {
                 _date = dateTime;
-                print(_date);
               },
             ),
           ),
@@ -378,7 +375,7 @@ class _PostScreen2State extends State<PostScreen2> {
     );
   }
 
-  _showBottomSheetList(int list) {
+  _showBottomSheetList(int list, ThemeData theme) {
     ///1 = type; 2 = category
     var selectedList = list == 1 ? _registerTypes : _registerCategories;
 
@@ -406,7 +403,7 @@ class _PostScreen2State extends State<PostScreen2> {
               },
               child: Text(
                 selectedList[index],
-                style: TextStyle(fontSize: 18.0),
+                style: theme.textTheme.body1,
                 textAlign: TextAlign.end,
               ),
             );

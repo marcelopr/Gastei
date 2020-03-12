@@ -170,11 +170,12 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Minha conta',
-          style: TextStyle(color: Colors.black),
+          style: theme.textTheme.subhead,
         ),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
@@ -186,7 +187,10 @@ class _AccountScreenState extends State<AccountScreen> {
           ListTile(
             enabled: _optionsEnabled,
             contentPadding: EdgeInsets.symmetric(horizontal: 32),
-            leading: Icon(Icons.person),
+            leading: Icon(
+              Icons.person,
+              color: theme.iconTheme.color,
+            ),
             trailing: _progressName ? CircularProgressIndicator() : null,
             title: TextField(
               enabled: _optionsEnabled,
@@ -209,12 +213,18 @@ class _AccountScreenState extends State<AccountScreen> {
           ListTile(
               enabled: _optionsEnabled,
               contentPadding: EdgeInsets.symmetric(horizontal: 32),
-              title: Text('Alterar senha'),
+              title: Text(
+                'Alterar senha',
+                style: theme.textTheme.body1,
+              ),
               subtitle: Text(
                 'Um email para alterar sua senha será enviado para o seu endereço.',
-                style: TextStyle(fontSize: 14),
+                style: theme.textTheme.subtitle,
               ),
-              leading: Icon(Icons.lock),
+              leading: Icon(
+                Icons.lock,
+                color: theme.iconTheme.color,
+              ),
               trailing: _progressPassword ? CircularProgressIndicator() : null,
               onTap: () => _reAuthenticate(context,
                   DialogType.changePassword) //_sendResetPasswordEmail(),
@@ -223,12 +233,18 @@ class _AccountScreenState extends State<AccountScreen> {
           ListTile(
               enabled: _optionsEnabled,
               contentPadding: EdgeInsets.symmetric(horizontal: 32),
-              title: Text('Restaurar configuração inicial'),
+              title: Text(
+                'Restaurar configuração inicial',
+                style: theme.textTheme.body1,
+              ),
               subtitle: Text(
                 'Remove todos os seus registros financeiros.',
-                style: TextStyle(fontSize: 14),
+                style: theme.textTheme.subtitle,
               ),
-              leading: Icon(Icons.settings_backup_restore),
+              leading: Icon(
+                Icons.settings_backup_restore,
+                color: theme.iconTheme.color,
+              ),
               trailing:
                   _progressResetConfig ? CircularProgressIndicator() : null,
               onTap: () => _reAuthenticate(context, DialogType.resetAccount)
@@ -238,11 +254,18 @@ class _AccountScreenState extends State<AccountScreen> {
           ListTile(
               enabled: _optionsEnabled,
               contentPadding: EdgeInsets.symmetric(horizontal: 32),
-              title: Text('Remover conta'),
+              title: Text(
+                'Remover conta',
+                style: theme.textTheme.body1,
+              ),
               subtitle: Text(
-                  'Remove sua conta e todos os seus registros financeiros.',
-                  style: TextStyle(fontSize: 14)),
-              leading: Icon(Icons.delete_forever),
+                'Remove sua conta e todos os seus registros financeiros.',
+                style: theme.textTheme.subtitle,
+              ),
+              leading: Icon(
+                Icons.delete_forever,
+                color: theme.iconTheme.color,
+              ),
               trailing: _progressRemove ? CircularProgressIndicator() : null,
               onTap: () => _reAuthenticate(context, DialogType.removeAccount)),
         ],

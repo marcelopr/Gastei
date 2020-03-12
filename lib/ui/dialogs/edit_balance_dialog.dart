@@ -1,5 +1,6 @@
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/firestore.dart';
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -52,6 +53,7 @@ class _EditBalanceDialogState extends State<EditBalanceDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      titleTextStyle: AppTheme.lightSubHeadTextStyle,
       title: Text('Editar saldo:'),
       content: TextField(
         keyboardType: TextInputType.number,

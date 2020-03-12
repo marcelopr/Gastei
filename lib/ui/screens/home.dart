@@ -39,10 +39,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       ///resize.. Evita que o RenderFlex Overflow quando o teclado aparece nos dialogs
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(),
       body: Column(
         children: <Widget>[
           Flexible(

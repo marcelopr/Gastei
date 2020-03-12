@@ -105,7 +105,7 @@ class _MonthlyBalanceDetailsState extends State<MonthlyBalanceDetails> {
       appBar: AppBar(
         title: Text(
           appBarTitle,
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.subhead,
         ),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
@@ -154,12 +154,12 @@ class _MonthlyBalanceDetailsState extends State<MonthlyBalanceDetails> {
           children: <Widget>[
             Text(
               'Lucro',
-              style: kMBInfoHeaderTextStyle,
+              style: Theme.of(context).textTheme.subhead,
             ),
             SizedBox(height: 8.0),
             Text(
               '${_registerCount(_incomeList.length)} com valor total de R\$ ${CurrencyFormatter().realSign(_mb.income)}',
-              style: kMBInfoDetails,
+              style: Theme.of(context).textTheme.body2,
             ),
           ]),
     );
@@ -176,7 +176,7 @@ class _MonthlyBalanceDetailsState extends State<MonthlyBalanceDetails> {
             padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 8.0),
             child: Text(
               'Despesas',
-              style: kMBInfoHeaderTextStyle,
+              style: Theme.of(context).textTheme.subhead,
             ),
           ),
           SizedBox(height: 8.0),

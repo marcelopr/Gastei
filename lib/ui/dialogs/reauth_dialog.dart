@@ -1,3 +1,4 @@
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:carteira/utils/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,7 @@ class _ReAuthDialogState extends State<ReAuthDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+        titleTextStyle: AppTheme.lightSubHeadTextStyle,
         title: Text(_dialogTitle),
         content: TextField(
           enabled: _isLoading ? false : true,

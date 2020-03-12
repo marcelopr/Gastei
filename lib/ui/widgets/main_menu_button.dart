@@ -1,3 +1,4 @@
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuButton extends StatelessWidget {
@@ -20,8 +21,8 @@ class MainMenuButton extends StatelessWidget {
       margin: EdgeInsets.only(right: 12.0),
       child: FlatButton(
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(12.0)),
-        color: Colors.grey[200],
+            borderRadius: new BorderRadius.circular(AppTheme.borderRadius)),
+        color: Theme.of(context).buttonColor,
         padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
         onPressed: onPressed,
         child: SizedBox(
@@ -32,14 +33,9 @@ class MainMenuButton extends StatelessWidget {
             children: <Widget>[
               Icon(
                 icon,
-                color: Colors.black54,
+                color: Theme.of(context).accentIconTheme.color,
               ),
-              Text(title,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w400,
-                  )),
+              Text(title, style: Theme.of(context).textTheme.caption),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:carteira/models/monthly_balance.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/routes/routing_constants.dart';
 import 'package:carteira/services/firestore.dart';
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:carteira/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -36,8 +37,10 @@ class _CurrentMonthBalanceState extends State<CurrentMonthBalance> {
       return Expanded(
         child: Center(
           child: CircularPercentIndicator(
-            progressColor: kBlue,
-            backgroundColor: mb.outcome == 0 ? Colors.grey[300] : kOrange,
+            progressColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: mb.outcome == 0
+                ? Colors.grey[300]
+                : Theme.of(context).colorScheme.secondary,
             percent: mb.income == 0 ? 0 : mb.incomePercent(),
             animation: true,
             animationDuration: 800,
@@ -47,9 +50,16 @@ class _CurrentMonthBalanceState extends State<CurrentMonthBalance> {
             center: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('R\$ ${mb.income}', style: kCircularPercentTextStyle),
+                Text(
+                  'R\$ ${mb.income}',
+                  style: Theme.of(context).textTheme.subtitle.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
                 Text('R\$ ${mb.outcome}',
-                    style: kCircularPercentTextStyle.copyWith(color: kOrange))
+                    style: Theme.of(context).textTheme.subtitle.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ))
               ],
             ),
           ),
@@ -62,9 +72,9 @@ class _CurrentMonthBalanceState extends State<CurrentMonthBalance> {
         onPressed: () {
           Navigator.pushNamed(context, MonthlyBalanceRoute);
         },
-        color: Colors.grey[200],
+        color: Theme.of(context).buttonColor,
         shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(12.0),
+          borderRadius: new BorderRadius.circular(AppTheme.borderRadius),
         ),
         padding: EdgeInsets.all(12.0),
         child: SizedBox(
@@ -76,7 +86,9 @@ class _CurrentMonthBalanceState extends State<CurrentMonthBalance> {
             children: <Widget>[
               Text(
                 DateFormatter().getMonthName(_dateToday.month),
-                style: kMainHeaderTextStyle.copyWith(color: Colors.black87),
+                style: Theme.of(context).textTheme.body2.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               _buildBalanceIndicator(mb),
             ],
@@ -91,12 +103,16 @@ class _CurrentMonthBalanceState extends State<CurrentMonthBalance> {
           return Container(
             width: double.infinity,
             child: FlatButton(
-              color: kOrange,
+              color: Theme.of(context).colorScheme.secondary,
               shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(12.0)),
+                  borderRadius:
+                      new BorderRadius.circular(AppTheme.borderRadius)),
               child: Text(
                 'Add Registro',
-                style: TextStyle(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .body2
+                    .copyWith(color: Colors.white),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, PostRoute, arguments: {

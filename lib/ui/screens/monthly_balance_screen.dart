@@ -67,7 +67,8 @@ class _MBScreenState extends State<MBScreen> {
 
   Center _message() {
     return Center(
-      child: Text('Não existem registros.', style: kListMessageStyle),
+      child: Text('Não existem registros.',
+          style: Theme.of(context).textTheme.body1),
     );
   }
 
@@ -79,7 +80,7 @@ class _MBScreenState extends State<MBScreen> {
       appBar: AppBar(
         title: Text(
           'Balanço Mensal',
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.subhead,
         ),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
@@ -103,9 +104,7 @@ class _MBScreenState extends State<MBScreen> {
       return _message();
     }
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
-        color: Colors.black38,
-      ),
+      separatorBuilder: (context, index) => Divider(),
       controller: _scrollController,
       itemCount: _mbList.length,
       itemBuilder: (context, index) {

@@ -7,7 +7,6 @@ import 'package:carteira/ui/screens/monthly_balance_screen.dart';
 import 'package:carteira/ui/screens/post_screen2.dart';
 import 'package:carteira/ui/screens/registers_screen.dart';
 import 'package:carteira/ui/screens/signin%20copy.dart';
-import 'package:carteira/ui/screens/signin.dart';
 import 'package:carteira/ui/screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

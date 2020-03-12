@@ -20,6 +20,7 @@ class MonthlyBalanceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return FlatButton(
       padding: EdgeInsets.all(0.0),
       onPressed: () {
@@ -38,9 +39,8 @@ class MonthlyBalanceItem extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(_monthYear(),
-                    style: kMonthlyBalanceTextStyle.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black45,
+                    style: theme.textTheme.body2.copyWith(
+                      fontSize: 17.0,
                     )),
               ],
             ),
@@ -49,12 +49,12 @@ class MonthlyBalanceItem extends StatelessWidget {
               children: <Widget>[
                 Text(
                   '+ R\$ ${currencyFormatter.realSign(mb.income)}',
-                  style: kMonthlyBalanceTextStyle,
+                  style: theme.textTheme.body1,
                 ),
                 Text('- R\$ ${currencyFormatter.realSign(mb.outcome)}',
-                    style: kMonthlyBalanceTextStyle),
+                    style: theme.textTheme.body1),
                 Text('R\$ ${mb.monthlyBalance()}',
-                    style: kMonthlyBalanceTextStyle.copyWith(
+                    style: theme.textTheme.body1.copyWith(
                         color: mb.isMonthlyBalancePositive() ? kBlue : kOrange))
               ],
             ),

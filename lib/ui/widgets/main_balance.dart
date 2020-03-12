@@ -1,5 +1,6 @@
 import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/user.dart';
+import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:carteira/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,9 @@ class MainBalance extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _getName(userData.getName),
+              _getName(userData.getName, context),
               SizedBox(height: 20.0),
-              _balanceInfo(userData),
+              _balanceInfo(userData, context),
             ],
           ),
         ),
@@ -41,43 +42,51 @@ class MainBalance extends StatelessWidget {
     }
   }
 
-  Widget _getName(String name) {
+  Widget _getName(String name, BuildContext context) {
     return RichText(
       text: TextSpan(
         children: <TextSpan>[
-          TextSpan(text: _apropriateTimeGreeting(), style: kGreetingsTextStyle),
-          TextSpan(text: '$name', style: kGreetingsTextStyle)
+          TextSpan(
+              text: '${_apropriateTimeGreeting()}$name',
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .copyWith(fontWeight: FontWeight.w200)),
         ],
       ),
     );
   }
 
-  Widget _balanceInfo(UserData userData) {
+  Widget _balanceInfo(UserData userData, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('SALDO ATUAL',
-            style: TextStyle(fontSize: 11.0, color: Colors.black54)),
+        Text(
+          'SALDO ATUAL',
+          style: Theme.of(context).textTheme.caption,
+        ),
         SizedBox(height: 4.0),
         if (!userData.balanceVisible)
           Text(
             'Oculto',
-            style: kBalanceTextStyle,
+            style: Theme.of(context)
+                .textTheme
+                .title
+                .copyWith(fontWeight: FontWeight.w900),
           ),
         if (userData.balanceVisible)
           RichText(
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
-                    text: 'R\$ ',
-                    style: TextStyle(
-                        fontSize: 26.0,
-                        fontWeight: FontWeight.w200,
-                        color: Colors.black54)),
+                    text: 'R\$ ', style: Theme.of(context).textTheme.body2),
                 TextSpan(
                     text: '${CurrencyFormatter().realSign(userData.balance)}',
-                    style: kBalanceTextStyle)
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(fontWeight: FontWeight.bold))
               ],
             ),
           ),

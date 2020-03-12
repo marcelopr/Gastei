@@ -51,7 +51,7 @@ class RegisterSearch extends SearchDelegate<String> {
           return LoadingIndicator();
         }
         if (snapshot.data.documents.isEmpty) {
-          return _message();
+          return _message(context);
         } else {
           return ListView.builder(
             itemCount: snapshot.data.documents.length,
@@ -91,11 +91,11 @@ class RegisterSearch extends SearchDelegate<String> {
     listUpdate = "updated";
   }
 
-  Widget _message() {
+  Widget _message(BuildContext context) {
     return Center(
       child: Text(
         'Nenhum resultado para \'${query.trim()}\'.',
-        style: kListMessageStyle,
+        style: Theme.of(context).textTheme.body1,
       ),
     );
   }

@@ -47,6 +47,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -67,8 +68,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   ],
                   maxLines: 1,
                   textInputAction: TextInputAction.next,
-                  decoration: kLoginTextFieldDecoration.copyWith(
+                  decoration: InputDecoration(
                       hintText: 'Digite seu email',
+                      hintStyle: theme.textTheme.body2,
                       errorText: _emailError ?? _emailError),
                   onFieldSubmitted: (value) {
                     FocusScope.of(context).requestFocus(_password1FocusNode);
@@ -100,8 +102,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   textAlign: TextAlign.center,
                   textInputAction: TextInputAction.next,
                   focusNode: _password1FocusNode,
-                  decoration: kLoginTextFieldDecoration.copyWith(
+                  decoration: InputDecoration(
                       hintText: 'Digite sua senha',
+                      hintStyle: theme.textTheme.body2,
                       errorText: _passwordError ?? _passwordError),
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(_password2FocusNode),
@@ -132,8 +135,9 @@ class _SignUpFormState extends State<SignUpForm> {
                   textAlign: TextAlign.center,
                   focusNode: _password2FocusNode,
                   textInputAction: TextInputAction.done,
-                  decoration: kLoginTextFieldDecoration.copyWith(
+                  decoration: InputDecoration(
                       hintText: 'Repita sua senha',
+                      hintStyle: theme.textTheme.body2,
                       errorText: _password2Error ?? _password2Error),
                   validator: (input) {
                     if (input.trim().isEmpty) {

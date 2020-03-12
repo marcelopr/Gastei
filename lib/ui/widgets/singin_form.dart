@@ -41,6 +41,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -58,8 +59,9 @@ class _SignInFormState extends State<SignInForm> {
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(_passwordNode),
-                  decoration: kLoginTextFieldDecoration.copyWith(
-                      hintText: 'Informe seu email'),
+                  decoration: InputDecoration(
+                      hintText: 'Informe seu email',
+                      hintStyle: theme.textTheme.body2),
                   validator: (input) {
                     input.trim();
                     if (input.isEmpty) {
@@ -82,8 +84,9 @@ class _SignInFormState extends State<SignInForm> {
                   focusNode: _passwordNode,
                   textInputAction: TextInputAction.done,
                   onFieldSubmitted: (value) {},
-                  decoration: kLoginTextFieldDecoration.copyWith(
-                      hintText: 'Informe sua senha'),
+                  decoration: InputDecoration(
+                      hintText: 'Informe sua senha',
+                      hintStyle: theme.textTheme.body2),
                   validator: (input) {
                     input.trim();
                     if (input.isEmpty) {
@@ -94,7 +97,6 @@ class _SignInFormState extends State<SignInForm> {
                     setState(() => _password = value.trim());
                   },
                 ),
-                SizedBox(height: 12.0),
                 SizedBox(height: 24.0),
                 ButtonTheme(
                   minWidth: double.infinity,
@@ -127,7 +129,7 @@ class _SignInFormState extends State<SignInForm> {
                 FlatButton(
                   child: Text('Esqueceu sua senha?',
                       textAlign: TextAlign.end,
-                      style: TextStyle(color: Colors.grey)),
+                      style: theme.textTheme.subtitle),
                   onPressed: () {
                     var email = _emailController.text.trim();
                     if (email.isEmpty) {

@@ -13,27 +13,35 @@ class MonthlyBalanceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildColumn(
-              icon: Icons.keyboard_arrow_up, value: _mb.income, color: kBlue),
+              icon: Icons.keyboard_arrow_up,
+              value: _mb.income,
+              color: kBlue,
+              theme: theme),
           _buildColumn(
               icon: Icons.keyboard_arrow_down,
               value: _mb.outcome,
-              color: Colors.red),
+              color: Colors.red,
+              theme: theme),
           _buildColumn(
               icon: Icons.attach_money,
               value: _mb.monthlyBalance(),
-              color: _mb.isMonthlyBalancePositive() ? kBlue : Colors.red),
+              color: _mb.isMonthlyBalancePositive() ? kBlue : Colors.red,
+              theme: theme),
         ],
       ),
     );
   }
 
-  Widget _buildColumn({IconData icon, int value, Color color}) {
+  Widget _buildColumn(
+      {IconData icon, int value, Color color, ThemeData theme}) {
     return Flexible(
       flex: 1,
       fit: FlexFit.tight,
@@ -43,7 +51,9 @@ class MonthlyBalanceInfo extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(3)),
                 border: Border.all(
-                    width: 1, color: Colors.black, style: BorderStyle.solid)),
+                    width: 1,
+                    color: theme.iconTheme.color,
+                    style: BorderStyle.solid)),
             child: Icon(
               icon,
             ),
@@ -51,7 +61,7 @@ class MonthlyBalanceInfo extends StatelessWidget {
           SizedBox(height: 12.0),
           Text(
             'R\$ $value',
-            style: kMonthlyBalanceTextStyle.copyWith(color: color),
+            style: theme.textTheme.body1.copyWith(color: color),
           ),
         ],
       ),

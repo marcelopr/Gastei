@@ -20,8 +20,9 @@ class CategoryExpensesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return FlatButton(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.zero,
       onPressed: () {
         showList(categoryExpenses.categoryItems);
       },
@@ -46,16 +47,13 @@ class CategoryExpensesItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         '${kRegisterCategories[categoryExpenses.category]}: ${categoryExpenses.percentage.toStringAsFixed(2)}%',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18.0,
-                        ),
+                        style: theme.textTheme.body1,
                       ),
                       SizedBox(height: 6.0),
                       Text(
                         '${_registerCount(categoryExpenses.categoryItems.length)} com valor total de R\$ ${_currencyFormatter.realSign(categoryExpenses.totalExpended)}',
                         textAlign: TextAlign.start,
-                        style: kMBInfoDetails,
+                        style: theme.textTheme.body2,
                       ),
                     ],
                   ),
@@ -83,7 +81,7 @@ class CategoryExpensesItem extends StatelessWidget {
           CustomIcons.getCategoryIcon(categoryExpenses.category),
           height: 20,
           width: 20,
-          color: Colors.black,
+          color: Theme.of(context).iconTheme.color,
         ),
       ),
     );

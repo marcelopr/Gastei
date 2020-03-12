@@ -34,6 +34,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     var screenHeigth = MediaQuery.of(context).size.height;
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
@@ -58,12 +60,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         SizedBox(width: 8.0),
                         Text(
-                          'eXtrato',
-                          style: TextStyle(
-                            letterSpacing: 6.0,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          'Gastei',
+                          style: theme.textTheme.title,
                         ),
                       ],
                     ),
@@ -74,10 +72,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TabBar(
-                      indicatorColor: kBlue,
-                      unselectedLabelColor: Colors.grey,
-                      labelColor: Colors.black,
-                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      indicatorColor: theme.colorScheme.primary,
+                      unselectedLabelColor: theme.textTheme.body2.color,
+                      labelColor: theme.textTheme.body1.color,
+                      labelStyle: theme.textTheme.subtitle,
                       indicatorWeight: 4.0,
                       indicatorSize: TabBarIndicatorSize.label,
                       tabs: <Widget>[
