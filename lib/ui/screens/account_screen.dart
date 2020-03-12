@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:carteira/state/theme_state.dart';
 
 class AccountScreen extends StatefulWidget {
   static const String id = 'account';
@@ -189,7 +190,7 @@ class _AccountScreenState extends State<AccountScreen> {
             contentPadding: EdgeInsets.symmetric(horizontal: 32),
             leading: Icon(
               Icons.person,
-              color: theme.iconTheme.color,
+              color: theme.accentIconTheme.color,
             ),
             trailing: _progressName ? CircularProgressIndicator() : null,
             title: TextField(
@@ -211,6 +212,30 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
           Divider(),
           ListTile(
+            enabled: _optionsEnabled,
+            contentPadding: EdgeInsets.symmetric(horizontal: 32),
+            title: Text(
+              'Modo Escuro',
+              style: theme.textTheme.body1,
+            ),
+            subtitle: Text(
+              'Ativar modo escuro do aplicativo.',
+              style: theme.textTheme.subtitle,
+            ),
+            leading: Icon(
+              Icons.wb_sunny,
+              color: theme.accentIconTheme.color,
+            ),
+            trailing: Switch(
+              value: Provider.of<ThemeState>(context).isDarkModeOn,
+              onChanged: (booleanValue) {
+                Provider.of<ThemeState>(context, listen: false)
+                    .updateTheme(booleanValue);
+              },
+            ),
+          ),
+          Divider(),
+          ListTile(
               enabled: _optionsEnabled,
               contentPadding: EdgeInsets.symmetric(horizontal: 32),
               title: Text(
@@ -223,7 +248,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               leading: Icon(
                 Icons.lock,
-                color: theme.iconTheme.color,
+                color: theme.accentIconTheme.color,
               ),
               trailing: _progressPassword ? CircularProgressIndicator() : null,
               onTap: () => _reAuthenticate(context,
@@ -243,7 +268,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               leading: Icon(
                 Icons.settings_backup_restore,
-                color: theme.iconTheme.color,
+                color: theme.accentIconTheme.color,
               ),
               trailing:
                   _progressResetConfig ? CircularProgressIndicator() : null,
@@ -264,7 +289,7 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               leading: Icon(
                 Icons.delete_forever,
-                color: theme.iconTheme.color,
+                color: theme.accentIconTheme.color,
               ),
               trailing: _progressRemove ? CircularProgressIndicator() : null,
               onTap: () => _reAuthenticate(context, DialogType.removeAccount)),

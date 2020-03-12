@@ -44,6 +44,7 @@ class AppTheme {
   static const double categoryIconBorderRadius = 18.0;
 
   static final ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
     backgroundColor: _lightScaffoldColor,
     scaffoldBackgroundColor: _lightScaffoldColor,
     fontFamily: 'Muli',
@@ -92,7 +93,7 @@ class AppTheme {
   );
 
   static final TextStyle lightBody2TextStyle = TextStyle(
-    fontSize: 16.0,
+    fontSize: 14.0,
     color: _lightBody2TextColor,
   );
 
@@ -109,6 +110,7 @@ class AppTheme {
   ///DARK THEME
 
   static final ThemeData darkTheme = ThemeData(
+      brightness: Brightness.dark,
       backgroundColor: _darkScaffoldColor,
       scaffoldBackgroundColor: _darkScaffoldColor,
       fontFamily: 'Muli',

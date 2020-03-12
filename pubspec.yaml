@@ -37,6 +37,8 @@ dependencies:
   async: ^2.0.8
   percent_indicator: ^2.1.1+1
   flutter_dash:
+  shared_preferences: ^0.5.6+3
+
 
 dev_dependencies:
   flutter_test:

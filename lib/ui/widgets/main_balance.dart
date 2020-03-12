@@ -48,10 +48,8 @@ class MainBalance extends StatelessWidget {
         children: <TextSpan>[
           TextSpan(
               text: '${_apropriateTimeGreeting()}$name',
-              style: Theme.of(context)
-                  .textTheme
-                  .title
-                  .copyWith(fontWeight: FontWeight.w200)),
+              style:
+                  Theme.of(context).textTheme.body2.copyWith(fontSize: 22.0)),
         ],
       ),
     );

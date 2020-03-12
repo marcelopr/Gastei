@@ -96,7 +96,10 @@ class _ReAuthDialogState extends State<ReAuthDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
         titleTextStyle: AppTheme.lightSubHeadTextStyle,
-        title: Text(_dialogTitle),
+        title: Text(
+          _dialogTitle,
+          style: Theme.of(context).textTheme.body1,
+        ),
         content: TextField(
           enabled: _isLoading ? false : true,
           controller: _passwordController,
