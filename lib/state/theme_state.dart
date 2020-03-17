@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeState extends ChangeNotifier {
   final String key = 'theme';
   bool isDarkModeOn = false;
+  bool _isLoaded = false;
   SharedPreferences _preferences;
 
   ThemeState() {
@@ -20,6 +21,7 @@ class ThemeState extends ChangeNotifier {
     await _initPrefs();
     isDarkModeOn = _preferences.getBool(key) ?? false;
     notifyListeners();
+    _isLoaded = true;
   }
 
   _saveToPrefs() async {
@@ -33,4 +35,6 @@ class ThemeState extends ChangeNotifier {
     _saveToPrefs();
     print('DarkMode: $isDarkModeOn');
   }
+
+  bool get prefsLoaded => this._isLoaded;
 }

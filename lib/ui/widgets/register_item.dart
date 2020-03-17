@@ -72,7 +72,7 @@ class RegisterItem extends StatelessWidget {
                       register.title,
                       style: theme.textTheme.body1.copyWith(
                         color: register.isIncome()
-                            ? Colors.greenAccent
+                            ? theme.colorScheme.primary
                             : theme.textTheme.body1.color,
                       ),
                     ),
@@ -96,7 +96,7 @@ class RegisterItem extends StatelessWidget {
                 'R\$ ${register.value}',
                 style: theme.textTheme.body1.copyWith(
                   color: register.isIncome()
-                      ? Colors.greenAccent
+                      ? theme.colorScheme.primary
                       : theme.textTheme.body1.color,
                 ),
               ),

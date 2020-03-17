@@ -84,7 +84,6 @@ class _RecentRegisterState extends State<RecentRegister> {
                         ..fromSnapshot(snapshot.data.documents[0]);
 
                       return Column(
-                        mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -115,7 +114,7 @@ class _RecentRegisterState extends State<RecentRegister> {
                             'Última movimentação foi registrada ${_registerDate(register.date)} com valor de R\$ ${_currencyFormatter.realSign(register.value)}.',
                             style: Theme.of(context).textTheme.subhead.copyWith(
                                   color: Colors.white,
-                                  fontSize: 21.0,
+                                  fontSize: 19.0,
                                 ),
                           ),
                         ],

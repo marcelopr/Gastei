@@ -6,8 +6,7 @@ import 'package:carteira/ui/screens/monthy_balance_details_screen.dart';
 import 'package:carteira/ui/screens/monthly_balance_screen.dart';
 import 'package:carteira/ui/screens/post_screen2.dart';
 import 'package:carteira/ui/screens/registers_screen.dart';
-import 'package:carteira/ui/screens/signin%20copy.dart';
-import 'package:carteira/ui/screens/signup.dart';
+import 'package:carteira/ui/screens/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,9 +27,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case LoginRoute:
       return MaterialPageRoute(builder: (context) => SignInScreen());
-
-    case RegistrationRoute:
-      return MaterialPageRoute(builder: (context) => SignUp());
 
     case HomeRoute:
       return MaterialPageRoute(

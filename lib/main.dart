@@ -1,6 +1,7 @@
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/auth.dart';
 import 'package:carteira/state/theme_state.dart';
+import 'package:carteira/ui/screens/landing_screen.dart';
 import 'package:carteira/ui/screens/wrapper.dart';
 import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';

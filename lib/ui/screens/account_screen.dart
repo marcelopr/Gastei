@@ -146,7 +146,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => SignIn()),
+          MaterialPageRoute(builder: (context) => SignInScreen()),
           ModalRoute.withName(LoginRoute));
     } catch (err) {
       _toast(err.toString());
@@ -173,6 +173,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Minha conta',
