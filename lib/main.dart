@@ -1,8 +1,6 @@
 import 'package:carteira/models/user.dart';
-import 'package:carteira/services/auth.dart';
 import 'package:carteira/state/theme_state.dart';
 import 'package:carteira/ui/screens/landing_screen.dart';
-import 'package:carteira/ui/screens/wrapper.dart';
 import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -17,12 +15,15 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
-      runApp(
-        ChangeNotifierProvider<ThemeState>(
+      runApp(MultiProvider(providers: [
+        Provider<User>(create: (context) => User()),
+        ChangeNotifierProvider<ThemeState>(create: (context) => ThemeState())
+      ], child: MyApp())
+          /*ChangeNotifierProvider<ThemeState>(
           create: (context) => ThemeState(),
           child: MyApp(),
-        ),
-      );
+        ),*/
+          );
     },
   );
 }
@@ -30,34 +31,31 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<User>.value(
-      value: AuthService().user,
-      child: Consumer<ThemeState>(
-        builder: (context, themeState, child) {
-          return MaterialApp(
-            title: 'Gastei',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode:
-                themeState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
-            home: Wrapper(),
-            onGenerateRoute: router.generateRoute,
-            navigatorObservers: [
-              FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
-            ],
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en'), // English
-              const Locale('pt'), // Portuguese
-            ],
-          );
-        },
-      ),
+    return Consumer<ThemeState>(
+      builder: (context, themeState, child) {
+        return MaterialApp(
+          title: 'Gastei',
+          debugShowCheckedModeBanner: false,
+          //Talvez desativar o theme
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: themeState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+          home: LandingScreen(),
+          onGenerateRoute: router.generateRoute,
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+          ],
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en'), // English
+            const Locale('pt'), // Portuguese
+          ],
+        );
+      },
     );
   }
 }

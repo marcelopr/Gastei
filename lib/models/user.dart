@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {
-  final String uid;
+  String uid;
   User({this.uid});
+
+  set userUid(String uid) {
+    this.uid = uid;
+  }
 }
 
 class UserData extends ChangeNotifier {

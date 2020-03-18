@@ -147,7 +147,7 @@ class _AccountScreenState extends State<AccountScreen> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => SignInScreen()),
-          ModalRoute.withName(LoginRoute));
+          ModalRoute.withName(SignInRoute));
     } catch (err) {
       _toast(err.toString());
     } finally {

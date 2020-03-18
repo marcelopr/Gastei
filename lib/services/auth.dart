@@ -23,9 +23,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
-      print(user.uid);
-      return _userFromFirebaseUser(user);
+      return result.user;
     } on PlatformException catch (e) {
       print(e.toString());
       return PlatformExceptions().errorMessage(e.code);
@@ -39,9 +37,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
-      print(user.uid);
-      return _userFromFirebaseUser(user);
+      return result.user;
     } on PlatformException catch (e) {
       print(e.toString());
       return PlatformExceptions().errorMessage(e.code);

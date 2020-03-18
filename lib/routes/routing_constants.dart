@@ -1,7 +1,7 @@
 const String HomeViewRoute = '/';
 const String SplashScreenRoute = 'splash-screen';
-const String LoginRoute = 'login';
-const String HomeRoute = 'login';
+const String HomeRoute = 'home_screen';
+const String SignInRoute = 'signin_screen';
 const String RegistrationRoute = 'registration';
 const String WalletRoute = 'wallet';
 const String PostRoute = 'post';

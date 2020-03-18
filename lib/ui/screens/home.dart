@@ -1,7 +1,6 @@
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/firestore.dart';
 import 'package:carteira/ui/widgets/activity_menu.dart';
-import 'package:carteira/ui/widgets/loading_indicator.dart';
 import 'package:carteira/ui/widgets/main_balance.dart';
 import 'package:carteira/ui/widgets/main_menu.dart';
 import 'package:flutter/material.dart';

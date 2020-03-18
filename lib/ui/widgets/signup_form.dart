@@ -1,7 +1,11 @@
 import 'package:carteira/constants/constants.dart';
+import 'package:carteira/models/user.dart';
+import 'package:carteira/routes/routing_constants.dart';
 import 'package:carteira/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class SignUpForm extends StatefulWidget {
   final Function showSpinner;
@@ -174,11 +178,15 @@ class _SignUpFormState extends State<SignUpForm> {
                         _showSpinner(true);
                         dynamic result = await _authService
                             .registerWithEmailAndPassword(_email, _password);
+                        _showSpinner(false);
                         if (result is String) {
-                          _showSpinner(false);
                           if (result is String) _showMessage(result);
                         } else {
-                          Navigator.pop(context);
+                          FirebaseUser firebaseUser = result;
+                          Provider.of<User>(context, listen: false).userUid =
+                              firebaseUser.uid;
+                          print(firebaseUser.uid);
+                          Navigator.pushReplacementNamed(context, HomeRoute);
                         }
                       }
                     },

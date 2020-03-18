@@ -25,7 +25,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   }
 
   switch (settings.name) {
-    case LoginRoute:
+    case SignInRoute:
       return MaterialPageRoute(builder: (context) => SignInScreen());
 
     case HomeRoute:
@@ -94,5 +94,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           return _transitionBuilder(animation, child);
         },
       );
+
+    default:
+      return MaterialPageRoute(builder: (context) => SignInScreen());
   }
 }

@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignInScreen extends StatefulWidget {
-  static const String id = 'login_screen';
+  static const String id = 'signin_screen';
 
   @override
   _SignInScreenState createState() => _SignInScreenState();

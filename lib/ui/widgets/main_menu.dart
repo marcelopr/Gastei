@@ -6,8 +6,10 @@ import 'package:carteira/services/firestore.dart';
 import 'package:carteira/ui/dialogs/edit_balance_dialog.dart';
 import 'package:carteira/ui/dialogs/reauth_dialog.dart';
 import 'package:carteira/ui/widgets/main_menu_button.dart';
+import 'package:carteira/ui/widgets/singin_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class MainMenu extends StatelessWidget {
@@ -53,13 +55,29 @@ class MainMenu extends StatelessWidget {
               icon: Icons.exit_to_app,
               title: 'Sair',
               onPressed: () async {
-                await AuthService().signOut();
+                dynamic result = await AuthService().signOut();
+                if (result is String) {
+                  _showMessage(result);
+                } else {
+                  Navigator.pushReplacementNamed(context, SignInRoute);
+                }
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  _showMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 3,
+        //backgroundColor: kToastBackgroundColor,
+        textColor: Colors.white,
+        fontSize: 14.0);
   }
 
   _reAuthenticate(BuildContext context, DialogType action, String uid,

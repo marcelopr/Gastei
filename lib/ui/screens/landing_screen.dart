@@ -1,4 +1,8 @@
+import 'package:carteira/models/user.dart';
+import 'package:carteira/routes/routing_constants.dart';
+import 'package:carteira/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -6,38 +10,43 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  bool _preferencesLoaded = false;
-
   @override
   void initState() {
-    _loadPrefs();
+    _verifyLoggedUser();
     super.initState();
   }
 
-  _loadPrefs() async {
-    await Future.delayed(const Duration(milliseconds: 2500));
+  void _verifyLoggedUser() async {
+    final user = await AuthService().firebaseUser;
+    //await Future.delayed(const Duration(milliseconds: 2500));
+    if (user != null) {
+      Provider.of<User>(context, listen: false).userUid = user.uid;
+      Navigator.pushReplacementNamed(context, HomeRoute);
+    } else {
+      Navigator.pushReplacementNamed(context, SignInRoute);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
         color: Colors.white,
         child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'lib/assets/launcher/launcher_icon_transparent.png',
-              width: 40.0,
-              height: 40.0,
-            ),
-            SizedBox(width: 8.0),
-            Text(
-              'Gastei',
-              style: Theme.of(context).textTheme.title,
-            ),
-          ],
-        )));
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'lib/assets/launcher/launcher_icon_transparent.png',
+                width: 40.0,
+                height: 40.0,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:carteira/constants/constants.dart';
+import 'package:carteira/models/user.dart';
+import 'package:carteira/routes/routing_constants.dart';
 import 'package:carteira/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignInForm extends StatefulWidget {
   final Function showSpinner;
@@ -113,13 +117,18 @@ class _SignInFormState extends State<SignInForm> {
                       if (_formKey.currentState.validate()) {
                         _formKey.currentState.save();
                         _showSpinner(true);
-
-                        dynamic result = await _authService
+                        final result = await _authService
                             .signInWithEmailAndPassword(_email, _password);
+                        _showSpinner(false);
 
                         if (result is String) {
-                          _showSpinner(false);
                           _showMessage(result);
+                        } else if (result != null) {
+                          FirebaseUser firebaseUser = result;
+                          Provider.of<User>(context, listen: false).userUid =
+                              firebaseUser.uid;
+                          print(firebaseUser.uid);
+                          Navigator.pushReplacementNamed(context, HomeRoute);
                         }
                       }
                     },
