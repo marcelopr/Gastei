@@ -207,7 +207,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   errorText: _nameError ?? _nameError,
                   border: InputBorder.none),
               onSubmitted: (name) {
-                _verifyName() ? _updateName() : null;
+                if (_verifyName()) _updateName();
               },
             ),
           ),

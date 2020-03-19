@@ -1,4 +1,3 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/register.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/firestore.dart';
@@ -22,7 +21,11 @@ class RegisterSearch extends SearchDelegate<String> {
       IconButton(
         icon: Icon(Icons.search),
         onPressed: () {
-          showResults(context);
+          if (query.trim().isEmpty) {
+            _message(context, 'Informe o título do registro');
+          } else {
+            showResults(context);
+          }
         },
       )
     ];
@@ -51,7 +54,8 @@ class RegisterSearch extends SearchDelegate<String> {
           return LoadingIndicator();
         }
         if (snapshot.data.documents.isEmpty) {
-          return _message(context);
+          return _message(context,
+              'Nenhum registro com o título "${query.trim()}" encontrado.');
         } else {
           return ListView.builder(
             itemCount: snapshot.data.documents.length,
@@ -79,7 +83,20 @@ class RegisterSearch extends SearchDelegate<String> {
   }
 
   @override
-  String get searchFieldLabel => 'Digite o título do registro';
+  String get searchFieldLabel => 'Título do registro';
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    assert(context != null);
+    final ThemeData theme = Theme.of(context);
+    assert(theme != null);
+    return theme.copyWith(
+      primaryColor: theme.primaryColor,
+      primaryIconTheme: theme.primaryIconTheme,
+      primaryColorBrightness: theme.primaryColorBrightness,
+      primaryTextTheme: theme.primaryTextTheme,
+    );
+  }
 
   _removeRegister(Register register) async {
     FirestoreService _firestore = FirestoreService(uid: userData.uid);
@@ -91,11 +108,15 @@ class RegisterSearch extends SearchDelegate<String> {
     listUpdate = "updated";
   }
 
-  Widget _message(BuildContext context) {
-    return Center(
-      child: Text(
-        'Nenhum resultado para \'${query.trim()}\'.',
-        style: Theme.of(context).textTheme.body1,
+  Widget _message(BuildContext context, String message) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Center(
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.body1,
+        ),
       ),
     );
   }

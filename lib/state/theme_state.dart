@@ -33,7 +33,6 @@ class ThemeState extends ChangeNotifier {
     this.isDarkModeOn = isDarkModeOn;
     notifyListeners();
     _saveToPrefs();
-    print('DarkMode: $isDarkModeOn');
   }
 
   bool get prefsLoaded => this._isLoaded;

@@ -1,6 +1,4 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/user.dart';
-import 'package:carteira/ui/theme/app_theme.dart';
 import 'package:carteira/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,30 +63,41 @@ class MainBalance extends StatelessWidget {
           style: Theme.of(context).textTheme.caption,
         ),
         SizedBox(height: 4.0),
-        if (!userData.balanceVisible)
-          Text(
-            'Oculto',
-            style: Theme.of(context)
-                .textTheme
-                .title
-                .copyWith(fontWeight: FontWeight.w900),
-          ),
-        if (userData.balanceVisible)
-          RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'R\$ ', style: Theme.of(context).textTheme.body2),
-                TextSpan(
-                    text: '${CurrencyFormatter().realSign(userData.balance)}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontWeight: FontWeight.bold))
-              ],
-            ),
-          ),
+        _balanceText(userData, context),
       ],
     );
+  }
+
+  Widget _balanceText(UserData userData, BuildContext context) {
+    if (userData.isLoading)
+      return Text(
+        'Carregando',
+        style: Theme.of(context)
+            .textTheme
+            .title
+            .copyWith(fontWeight: FontWeight.w900),
+      );
+    else if (!userData.balanceVisible)
+      return Text(
+        'Oculto',
+        style: Theme.of(context)
+            .textTheme
+            .title
+            .copyWith(fontWeight: FontWeight.w900),
+      );
+    else
+      return RichText(
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(text: 'R\$ ', style: Theme.of(context).textTheme.body2),
+            TextSpan(
+                text: '${CurrencyFormatter().realSign(userData.balance)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .title
+                    .copyWith(fontWeight: FontWeight.bold))
+          ],
+        ),
+      );
   }
 }

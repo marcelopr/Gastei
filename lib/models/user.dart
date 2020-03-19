@@ -15,6 +15,7 @@ class UserData extends ChangeNotifier {
   String name = '';
   int balance = 0;
   bool balanceVisible = true;
+  bool _isLoading = true;
 
   UserData();
 
@@ -36,4 +37,8 @@ class UserData extends ChangeNotifier {
   int get getBalance => this.balance;
 
   bool get get => this.balanceVisible;
+
+  bool get isLoading => this._isLoading;
+
+  changeLoading(bool value) => this._isLoading = value;
 }

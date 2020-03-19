@@ -122,7 +122,7 @@ class _RecentRegisterState extends State<RecentRegister> {
                     }
                   } else {
                     return Text(
-                      'Você ainda não possui registros adicionados',
+                      'Carregando registros..',
                       style: Theme.of(context).textTheme.subhead.copyWith(
                             color: Colors.white,
                           ),

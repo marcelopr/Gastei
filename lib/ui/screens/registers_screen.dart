@@ -1,4 +1,3 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/register.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/firestore.dart';
@@ -124,7 +123,7 @@ class _RegistersScreenState extends State<RegistersScreen> {
       body: Column(
         children: <Widget>[
           Expanded(child: _buildList()),
-          if (_isLoading) LinearProgressIndicator(),
+          Visibility(visible: _isLoading, child: LinearProgressIndicator()),
         ],
       ),
     );

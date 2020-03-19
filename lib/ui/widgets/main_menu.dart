@@ -6,7 +6,6 @@ import 'package:carteira/services/firestore.dart';
 import 'package:carteira/ui/dialogs/edit_balance_dialog.dart';
 import 'package:carteira/ui/dialogs/reauth_dialog.dart';
 import 'package:carteira/ui/widgets/main_menu_button.dart';
-import 'package:carteira/ui/widgets/singin_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

@@ -26,9 +26,9 @@ class _HomeState extends State<Home> {
   }
 
   _listenToUser() {
-    print("Started listen to user UID: ${userData.uid}");
     FirestoreService(uid: userData.uid).userData.listen((snapshot) {
       userData.fromSnapshot(snapshot);
+      userData.changeLoading(false);
     });
   }
 

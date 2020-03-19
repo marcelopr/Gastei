@@ -1,4 +1,3 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/monthly_balance.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/routes/routing_constants.dart';

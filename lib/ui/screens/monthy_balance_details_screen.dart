@@ -1,4 +1,3 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/category_expenses.dart';
 import 'package:carteira/models/monthly_balance.dart';
 import 'package:carteira/models/register.dart';
@@ -138,60 +137,66 @@ class _MonthlyBalanceDetailsState extends State<MonthlyBalanceDetails> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (_incomeList.isNotEmpty) _buildIncomeInfo(),
+            _buildIncomeInfo(),
             Divider(),
-            if (_categoryExpenses.isNotEmpty) _buildOutcomeInfo(),
+            _buildOutcomeInfo(),
           ],
         ),
       );
 
   Widget _buildIncomeInfo() {
-    return FlatButton(
-      padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
-      onPressed: () => _showBottomSheetList(_incomeList),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Lucro',
-              style: Theme.of(context).textTheme.subhead,
-            ),
-            SizedBox(height: 8.0),
-            Text(
-              '${_registerCount(_incomeList.length)} com valor total de R\$ ${CurrencyFormatter().realSign(_mb.income)}',
-              style: Theme.of(context).textTheme.body2,
-            ),
-          ]),
+    return Visibility(
+      visible: _incomeList.isNotEmpty,
+      child: FlatButton(
+        padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+        onPressed: () => _showBottomSheetList(_incomeList),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Lucro',
+                style: Theme.of(context).textTheme.subhead,
+              ),
+              SizedBox(height: 8.0),
+              Text(
+                '${_registerCount(_incomeList.length)} com valor total de R\$ ${CurrencyFormatter().realSign(_mb.income)}',
+                style: Theme.of(context).textTheme.body2,
+              ),
+            ]),
+      ),
     );
   }
 
   Widget _buildOutcomeInfo() {
-    return Flexible(
-      flex: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 8.0),
-            child: Text(
-              'Despesas',
-              style: Theme.of(context).textTheme.subhead,
+    return Visibility(
+      visible: _categoriesList.isNotEmpty,
+      child: Flexible(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0, right: 32.0, top: 8.0),
+              child: Text(
+                'Despesas',
+                style: Theme.of(context).textTheme.subhead,
+              ),
             ),
-          ),
-          SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _categoryExpenses.length,
-              itemBuilder: (context, index) {
-                return CategoryExpensesItem(
-                  categoryExpenses: _categoryExpenses[index],
-                  showList: _showBottomSheetList,
-                );
-              },
-            ),
-          )
-        ],
+            SizedBox(height: 8.0),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _categoryExpenses.length,
+                itemBuilder: (context, index) {
+                  return CategoryExpensesItem(
+                    categoryExpenses: _categoryExpenses[index],
+                    showList: _showBottomSheetList,
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

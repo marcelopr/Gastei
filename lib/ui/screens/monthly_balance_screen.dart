@@ -1,4 +1,3 @@
-import 'package:carteira/constants/constants.dart';
 import 'package:carteira/models/monthly_balance.dart';
 import 'package:carteira/models/user.dart';
 import 'package:carteira/services/firestore.dart';
@@ -92,7 +91,7 @@ class _MBScreenState extends State<MBScreen> {
         child: Column(
           children: <Widget>[
             Expanded(child: _buildList()),
-            if (_isLoading) LinearProgressIndicator(),
+            Visibility(visible: _isLoading, child: LinearProgressIndicator()),
           ],
         ),
       ),

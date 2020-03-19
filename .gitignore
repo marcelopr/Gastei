@@ -388,3 +388,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 >>>>>>> 7c6fcc209bb218e25de7195ba2ad31e4d4eebcf8
+android/app/google-services.json
