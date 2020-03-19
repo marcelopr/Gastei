@@ -40,5 +40,8 @@ class UserData extends ChangeNotifier {
 
   bool get isLoading => this._isLoading;
 
-  changeLoading(bool value) => this._isLoading = value;
+  changeLoading(bool value) {
+    this._isLoading = value;
+    notifyListeners();
+  }
 }

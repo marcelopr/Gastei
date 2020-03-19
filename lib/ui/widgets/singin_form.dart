@@ -151,14 +151,15 @@ class _SignInFormState extends State<SignInForm> {
                       setState(() => _emailError = 'Informe um email válido');
                     } else {
                       setState(() => _emailError = null);
-                    }
-                    final result =
-                        await _authService.sendResetPasswordEmail(email);
-                    if (result is String) {
-                      _showMessage(result);
-                    } else {
-                      _showMessage(
-                          'Verifique seu email para recuperar sua senha');
+
+                      final result =
+                          await _authService.sendResetPasswordEmail(email);
+                      if (result is String) {
+                        _showMessage(result);
+                      } else {
+                        _showMessage(
+                            'Verifique seu email para recuperar sua senha');
+                      }
                     }
                   },
                 ),

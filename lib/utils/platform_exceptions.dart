@@ -43,7 +43,7 @@ class PlatformExceptions {
         break;
       default:
         {
-          return 'Erro ao entrar';
+          return 'Erro ao realizar a ação';
         }
     }
   }

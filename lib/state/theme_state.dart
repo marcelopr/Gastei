@@ -20,8 +20,8 @@ class ThemeState extends ChangeNotifier {
   _loadFromPrefs() async {
     await _initPrefs();
     isDarkModeOn = _preferences.getBool(key) ?? false;
-    notifyListeners();
     _isLoaded = true;
+    notifyListeners();
   }
 
   _saveToPrefs() async {
