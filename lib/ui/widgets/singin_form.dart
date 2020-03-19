@@ -64,6 +64,7 @@ class _SignInFormState extends State<SignInForm> {
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(_passwordNode),
                   decoration: InputDecoration(
+                      errorText: _emailError,
                       hintText: 'Informe seu email',
                       hintStyle: theme.textTheme.body2),
                   validator: (input) {
@@ -139,18 +140,26 @@ class _SignInFormState extends State<SignInForm> {
                   child: Text('Esqueceu sua senha?',
                       textAlign: TextAlign.end,
                       style: theme.textTheme.subtitle),
-                  onPressed: () {
+                  onPressed: () async {
                     var email = _emailController.text.trim();
+
                     if (email.isEmpty) {
-                      setState(() {
-                        email = 'Informe seu email';
-                      });
-                      return;
+                      setState(() => _emailError = 'Informe seu email');
+                    } else if (!RegExp(
+                            r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(email)) {
+                      setState(() => _emailError = 'Informe um email válido');
+                    } else {
+                      setState(() => _emailError = null);
                     }
-                    if (email != null) {
-                      email = null;
+                    final result =
+                        await _authService.sendResetPasswordEmail(email);
+                    if (result is String) {
+                      _showMessage(result);
+                    } else {
+                      _showMessage(
+                          'Verifique seu email para recuperar sua senha');
                     }
-                    // _authService.sendResetPasswordEmail(email);
                   },
                 ),
               ],

@@ -26,7 +26,6 @@ class _SignInScreenState extends State<SignInScreen> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 3,
-        //backgroundColor: kToastBackgroundColor,
         textColor: Colors.white,
         fontSize: 14.0);
   }
@@ -38,53 +37,51 @@ class _SignInScreenState extends State<SignInScreen> {
     var screenHeigth = MediaQuery.of(context).size.height;
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
-      child: SafeArea(
-        child: DefaultTabController(
+      child: Scaffold(
+        body: DefaultTabController(
           length: 2,
-          child: Scaffold(
-            body: Column(
-              children: <Widget>[
-                Container(
-                  height: screenHeigth / 2.8,
-                  padding: EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Center(
-                    child: Image.asset(
-                      'lib/assets/launcher/launcher_icon_transparent.png',
-                      width: 50.0,
-                      height: 50.0,
-                    ),
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: screenHeigth / 3.8,
+                padding: EdgeInsets.symmetric(horizontal: 24.0),
+                child: Center(
+                  child: Image.asset(
+                    'lib/assets/launcher/launcher_icon_transparent.png',
+                    width: 50.0,
+                    height: 50.0,
                   ),
                 ),
-                PreferredSize(
-                  preferredSize: Size.fromHeight(50.0),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: TabBar(
-                      indicatorColor: theme.colorScheme.primary,
-                      unselectedLabelColor: theme.textTheme.body2.color,
-                      labelColor: theme.textTheme.body1.color,
-                      labelStyle: theme.textTheme.subtitle,
-                      indicatorWeight: 4.0,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      tabs: <Widget>[
-                        Tab(child: Text('Entrar')),
-                        Tab(child: Text('Criar Conta')),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    children: <Widget>[
-                      SignInForm(
-                          showSpinner: _spinner, showMessage: _showMessage),
-                      SignUpForm(
-                          showSpinner: _spinner, showMessage: _showMessage),
+              ),
+              PreferredSize(
+                preferredSize: Size.fromHeight(50.0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: TabBar(
+                    indicatorColor: theme.colorScheme.primary,
+                    unselectedLabelColor: theme.textTheme.body2.color,
+                    labelColor: theme.textTheme.body1.color,
+                    labelStyle: theme.textTheme.subtitle,
+                    indicatorWeight: 4.0,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    tabs: <Widget>[
+                      Tab(child: Text('Entrar')),
+                      Tab(child: Text('Criar Conta')),
                     ],
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: <Widget>[
+                    SignInForm(
+                        showSpinner: _spinner, showMessage: _showMessage),
+                    SignUpForm(
+                        showSpinner: _spinner, showMessage: _showMessage),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
